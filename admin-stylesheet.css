@@ -2863,9 +2863,9 @@
 
 
 
-.dept-card.ucb .ly-tier-badge,
+.dept-card.ubc .ly-tier-badge,
 
-.dept-card.ucb .ly-tier-name {
+.dept-card.ubc .ly-tier-name {
 
   color: #386cce;
 
@@ -2873,7 +2873,7 @@
 
 
 
-.dept-card.ucb h2::after {
+.dept-card.ubc h2::after {
 
   background: #386cce;
 
@@ -2885,7 +2885,7 @@
 
 
 
-.dept-card.ucb {
+.dept-card.ubc {
 
   border: 1px solid rgba(56, 108, 206, 0.25);
 
@@ -4293,7 +4293,7 @@
 
 
 
-#UCB::after {
+#UBC::after {
 
   background-image: url("https://i.ibb.co/Z1YzMwtB/forums-attachments-clampycwu-png.png");
 
