@@ -4829,3 +4829,16 @@
         min-height: 40px;
 
     }
+
+    .seat-map-panel {
+        position: relative;
+    }
+
+    .seat-tooltip-box {
+        position: absolute;
+        top: 290px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+        pointer-events: none;
+    }
