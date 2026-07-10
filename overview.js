@@ -31,20 +31,20 @@
     // Sponsors, parties & Tags must be arrays.  All others can be left blank.  Stage automatically deletes itself if left blank.
     // number: Bill Number, title: Bill Name, type: Bill Type, status: Current Status, date: Creation Date, session: Session Number, sponsors: Sponsor Names, parties: Party Names, description: Bill's Description (supports HTML), stage: Current Stage, tags: Relevant Tags, link: Link to Legislation
     const bills = [
-        {
-            number: "",
-            title: "",
-            type: "",
-            status: "",
-            date: "",
-            session: "",
-            sponsors: [""],
-            parties: [""],
-            description: "",
-            stage: "",
-            tags: ["", "", ""],
-            link: ""
-        },
+        // {
+        //     number: "",
+        //     title: "",
+        //     type: "",
+        //     status: "",
+        //     date: "",
+        //     session: "",
+        //     sponsors: [""],
+        //     parties: [""],
+        //     description: "",
+        //     stage: "",
+        //     tags: ["", "", ""],
+        //     link: ""
+        // },
     ];
 
     // number: Decree Number, title: Decree Name, name: Issuer Name, role: Issuer Role, classOverride: Custom Class (Optional; supports strings or arrays), date: Creation Date, status: Current Status, category: Decree Category, description: Decree Description (supports HTML), expiresAt: Expiration Date (ISO 8601)
@@ -53,14 +53,14 @@
     // (CRUCIAL) - the first letter/number of the decree number will always be used to categorize session UI. The exact format is [session]-[number].  For example, "1-01" is session 1, decree 1.
     // Setting classOverride to "pinned" will pin the decree to the top of the page.
     const decrees = [
-        {
-            number: "", title: "",
-            role: "",
-            classOverride: "",
-            date: "", status: "", category: "",
-            description: "",
-            expiresAt: ""
-        },
+        // {
+        //     number: "", title: "",
+        //     role: "",
+        //     classOverride: "",
+        //     date: "", status: "", category: "",
+        //     description: "",
+        //     expiresAt: ""
+        // },
     ];
 
     const committeeCategoryColors = {
