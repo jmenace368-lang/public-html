@@ -1,99 +1,3 @@
-    //  DATA — Copy/edit the formats in their respective functions (remove comments when done).
-    // name: Party Name, color: Party Color, seats: Number of Seats, logo: Party Logo, stroke: Party Stroke, Description: Party Description (disabled)
-    // Use the stroke property to add a border to party seats. This is used to represent coalitions & must be manually set for each party using the coalition's color.
-    // Removing seats parameter or setting its value to 0 will remove that party from additional UI elements like the roster & legend but enable its use elsewhere.
-    const parties = [
-        { name: "The Optimates", color: "#783981", seats: 2, logo: "https://i.ibb.co/MxV0LCgH/logo-rew-ot.png", },
-        { name: "Combine Labour Co-operative", color: "#c52237", seats: 3, logo: "https://i.ibb.co/0ydBg5Tq/clc.png", },
-
-    ];
-
-    // name: Coalition Name, color: Coalition Color, seats: Number of Seats (redundant), logo: Coalition Logo (redundant), border: Coalition Border, Description: Party Description (disabled)
-    // Parameters like logo, seats, and description can be set but will otherwise not be used and will not be referenced in the party or council roster.
-    // Uses border instead of stroke for legend circle.
-    const coalitions = [
-        // { name: "Coalition Name", color: "#c52237", border: "dotted 2px purple", },
-    ];
-
-    // rank: Member Rank (Overseer, Chairperson, Councillor), cid: Member CID, name: Member Name, party: Member Party (Optional - Must match parties' name), partyColor: Member Party (Optional/Override)
-    // (OUTDATED) The partyColor parameter exists for the Chairperson. It is a specific override to ensure the Chairperson's party color, if applicable, remains represented even if they don't have a party on the Council. If no partyColor is set, it will default to the party color value if applicable, and if not, default to grey instead.
-    // (UPDATED) Override is no longer necessary.
-    // Inherits the same color value from the parties variable provided they share the same name.
-    const roster = [
-        { rank: "Chairperson", cid: "#11111", name: "Karl Söderberg", party: "The Harmony Coalition", partyColor: "#dbb542" },
-        { rank: "Councillor", cid: "#11111", name: "Julius Knightly", party: "The Optimates", },
-        { rank: "Councillor", cid: "#11111", name: "Rupert Rhodes", party: "The Optimates" },
-        { rank: "Councillor", cid: "#11111", name: "Horatio Kingsley", party: "Combine Labour Co-operative" },
-        { rank: "Councillor", cid: "#11111", name: "Tim Keyes", party: "Combine Labour Co-operative" },
-        { rank: "Councillor", cid: "#11111", name: "Youssef Sayagh", party: "Combine Labour Co-operative" },
-    ];
-
-    // Sponsors, parties & Tags must be arrays.  All others can be left blank.  Stage automatically deletes itself if left blank.
-    // number: Bill Number, title: Bill Name, type: Bill Type, status: Current Status, date: Creation Date, session: Session Number, sponsors: Sponsor Names, parties: Party Names, description: Bill's Description (supports HTML), stage: Current Stage, tags: Relevant Tags, link: Link to Legislation
-    const bills = [
-        // {
-        //     number: "",
-        //     title: "",
-        //     type: "",
-        //     status: "",
-        //     date: "",
-        //     session: "",
-        //     sponsors: [""],
-        //     parties: [""],
-        //     description: "",
-        //     stage: "",
-        //     tags: ["", "", ""],
-        //     link: ""
-        // },
-    ];
-
-    // number: Decree Number, title: Decree Name, name: Issuer Name, role: Issuer Role, classOverride: Custom Class (Optional; supports strings or arrays), date: Creation Date, status: Current Status, category: Decree Category, description: Decree Description (supports HTML), expiresAt: Expiration Date (ISO 8601)
-    // Not setting expiresAt removes expiration date completely.
-    // Not setting role defaults to "Overwatch".
-    // (CRUCIAL) - the first letter/number of the decree number will always be used to categorize session UI. The exact format is [session]-[number].  For example, "1-01" is session 1, decree 1.
-    // Setting classOverride to "pinned" will pin the decree to the top of the page.
-    const decrees = [
-        // {
-        //     number: "", title: "",
-        //     role: "",
-        //     classOverride: "",
-        //     date: "", status: "", category: "",
-        //     description: "",
-        //     expiresAt: ""
-        // },
-    ];
-
-    const committeeCategoryColors = {
-        "Special Committees": "#c52237",
-        "Standing Committees": "#1e90ff",
-        "Ad Hoc Committees": "#32cd32"
-    };
-
-    // category: Committee Category Heading, title: Committee Name, date: Est. Date, status: Current Status, classOverride: Custom Class (Optional; supports strings or arrays), description: Committee Description, members: Array of member objects
-    // Each member can contain { name, chair }.
-    // Setting classOverride to "pinned" will pin the committee to the top of its category.
-    const committees = [
-        {
-            category: "Special Committees",
-            title: "The Affairs Commission",
-            date: "Est. Date",
-            status: "inactive",
-            classOverride: "pinned",
-            description: "Oversees the Loyalist system, its Collaborators, and its integrity.",
-            members: [
-                { name: "Karina Orlova", chair: true },
-                { name: "Name", chair: false }
-            ]
-        },
-    ];
-
-    // Use 0 to default to assigned seat count.
-    const totalSeats = 0;
-    const defaultLogo = "https://combineoverwiki.net/images/thumb/3/34/Wasteland_Scanner_logo.svg/470px-Wasteland_Scanner_logo.svg.png";
-    const vacantColor = "rgba(255,255,255,0)";
-    // #777777
-    const vacantOpacity = "1";
-    const vacantStroke = "rgba(255,255,255,0.08)";
 
     //  CACHE
 
@@ -880,21 +784,23 @@
                 card.innerHTML = `
                     <div class="ly-tier-banner-header">
                         <div style="flex:1;">
-                            <div class="ly-tier-label">${committee.category || 'Committee'} · ${committee.date || 'Est. Date'}</div>
-                            <div class="ly-tier-title">${committee.title || 'Untitled Committee'}</div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
-                            <span class="status status-${committee.status || 'inactive'}">${committee.status || 'inactive'}</span>
-                            ${pinnedBadge}
-                        </div>
+                            <div class="ly-tier-label">${committee.category || 'Committee'} · ${committee.date
+                        ? `Est. ${committee.date}`
+                        : '<span style="opacity: 0.6;">Permanent</span>'}</div>
+            <div class="ly-tier-title">${committee.title || 'Untitled Committee'}</div>
+                        </div >
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+                    <span class="status status-${committee.status || 'inactive'}">${committee.status || 'inactive'}</span>
+                    ${pinnedBadge}
+                </div>
+                    </div >
+                <div class="ly-tier-banner-body">
+                    <p style="margin-bottom:14px;">${committee.description || 'Description'}</p>
+                    <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;">
+                        <span class="wn-eyebrow" style="display:block;margin-bottom:8px;">Members</span>
+                        <div>${membersMarkup || '<span class="member-pill">No members listed</span>'}</div>
                     </div>
-                    <div class="ly-tier-banner-body">
-                        <p style="margin-bottom:14px;">${committee.description || 'Description'}</p>
-                        <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:12px;">
-                            <span class="wn-eyebrow" style="display:block;margin-bottom:8px;">Members</span>
-                            <div>${membersMarkup || '<span class="member-pill">No members listed</span>'}</div>
-                        </div>
-                    </div>
+                </div>
                 `;
 
                 section.appendChild(card);
@@ -1043,7 +949,7 @@
 
         if (!data.length) {
             dom.dynamicContainer.innerHTML = `
-            <h3 style = "text-align:center;color:#6a6a7a;"><br>No legislation on record.</h3>`;
+            <h3 style="text-align:center;color:#6a6a7a;"><br>No legislation on record.</h3>`;
             updateSortUIIndicators();
             return;
         }
@@ -1076,27 +982,26 @@
                 block.className = 'ly-tier-banner';
                 block.style.marginBottom = '30px';
                 block.innerHTML = `
-                        <div class="ly-tier-banner-header">
-                            <div>
-                                <div class="ly-tier-label">${activeViewMode === "none" ? "All Legislation" : activeViewMode}</div>
-                                <div class="ly-tier-title">${activeViewMode === "none" ? "General Records" : groupKey}</div>
-                            </div>
-                        </div>
-                        <div class="ly-tier-banner-body" style="padding: 0;">
-                            <table class="wn-table-striped legislation-table" style="margin: 0; width: 100%;">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 70px; text-align: center;">No.</th>
-                                        <th>Title</th>
-                                        <th style="width: 110px;">Type</th>
-                                        <th style="width: 110px; text-align: center;">Status</th>
-                                        <th style="width: 95px; text-align: center;">Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="color: #c5c5d6;"></tbody>
-                            </table>
-                        </div>
-                    `;
+            <div class="ly-tier-banner-header">
+                <div>
+                    <div class="ly-tier-label">${activeViewMode === "none" ? "All Legislation" : activeViewMode}</div>
+                    <div class="ly-tier-title">${activeViewMode === "none" ? "General Records" : groupKey}</div>
+                </div>
+            </div>
+            <div class="ly-tier-banner-body" style="padding: 0;">
+                <table class="wn-table-striped legislation-table" style="margin: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="width: 70px; text-align: center;">No.</th>
+                            <th>Title</th>
+                            <th style="width: 110px;">Type</th>
+                            <th style="width: 110px; text-align: center;">Status</th>
+                            <th style="width: 95px; text-align: center;">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: #c5c5d6;"></tbody>
+                </table>
+            </div>`;
 
                 const tbody = block.querySelector('tbody');
                 const frag = document.createDocumentFragment();
