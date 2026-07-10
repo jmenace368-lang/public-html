@@ -4274,6 +4274,8 @@
 
         text-shadow: 0 0 2px currentColor;
 
+        border-sizing: border-box;
+
     }
 
 
@@ -4841,4 +4843,53 @@
         transform: translateX(-50%);
         z-index: 3;
         pointer-events: none;
+    }
+
+    #coalition-legend {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px 12px;
+        margin: 8px 20px;
+    }
+
+    #modal-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 8px;
+        text-transform: capitalize;
+    }
+
+    .special-red {
+        color: #c52237;
+    }
+
+    .standing-blue {
+        color: #1e90ff;
+    }
+
+    .temporary-green {
+        color: #32cd32;
+    }
+
+    .pinned {
+        border: 2px dashed #c52237;
+        box-shadow: 0 0 0 1px rgba(197, 34, 55, 0.25), 0 8px 8px rgba(197, 34, 55, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .pinned .ly-tier-banner-header {
+        background: rgba(44, 24, 37);
+    }
+
+    .status-pinned {
+        background: rgba(197, 34, 55, 0.2);
+        color: #f5a7b0;
+        border: 1px solid rgb(197, 34, 56);
+    }
+
+    .pinned .member-pill.chair {
+        background: rgba(197, 34, 55, 0.2);
+        color: #f5a7b0;
+        border-color: rgb(197, 34, 56);
     }
