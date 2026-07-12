@@ -1747,21 +1747,83 @@ function renderSyncedViews() {
     renderElectionDate();
 }
 
+let lastAssemblyDataSha = '';
+
+function parseGithubRawUrl(url) {
+    if (!url) return null;
+    let m = String(url).trim().match(
+        /^https?:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/refs\/heads\/([^/]+)\/(.+?)(?:\?.*)?$/i
+    );
+    if (m) {
+        return { owner: m[1], repo: m[2], branch: m[3], path: m[4] };
+    }
+    m = String(url).trim().match(
+        /^https?:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+?)(?:\?.*)?$/i
+    );
+    if (m) {
+        return { owner: m[1], repo: m[2], branch: m[3], path: m[4] };
+    }
+    return null;
+}
+
+function githubContentsApiUrl(parsed) {
+    const encodedPath = String(parsed.path || '')
+        .split('/')
+        .filter(Boolean)
+        .map(encodeURIComponent)
+        .join('/');
+    return `https://api.github.com/repos/${encodeURIComponent(parsed.owner)}/${encodeURIComponent(parsed.repo)}/contents/${encodedPath}`;
+}
+
+function decodeGithubBase64Content(b64) {
+    const cleaned = String(b64 || '').replace(/\n/g, '');
+    const binary = atob(cleaned);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+}
+
 async function fetchAssemblyDataFromRemote() {
     const base = typeof ASSEMBLY_DATA_URL === 'string' ? ASSEMBLY_DATA_URL.trim() : '';
     if (!base) return false;
 
-    const url = base.includes('?')
-        ? `${base}&_ts=${Date.now()}`
-        : `${base}?_ts=${Date.now()}`;
-
     try {
-        const res = await fetch(url, { cache: 'no-store' });
-        if (!res.ok) {
-            console.warn('[assembly-data] remote fetch failed:', res.status, url);
+        const parsed = parseGithubRawUrl(base);
+        // Prefer Contents API over raw.githubusercontent.com (raw CDN often lags 1–5 minutes).
+        if (parsed) {
+            const apiUrl = `${githubContentsApiUrl(parsed)}?ref=${encodeURIComponent(parsed.branch)}`;
+            const res = await fetch(apiUrl, {
+                cache: 'no-store',
+                headers: {
+                    Accept: 'application/vnd.github+json',
+                    'X-GitHub-Api-Version': '2022-11-28'
+                }
+            });
+            if (res.ok) {
+                const meta = await res.json();
+                if (meta && meta.sha && meta.sha === lastAssemblyDataSha) {
+                    return false;
+                }
+                if (meta && meta.content) {
+                    const payload = JSON.parse(decodeGithubBase64Content(meta.content));
+                    lastAssemblyDataSha = meta.sha || '';
+                    return applyAssemblyDataPayload(payload);
+                }
+            } else {
+                console.warn('[assembly-data] API fetch failed:', res.status, apiUrl);
+            }
+        }
+
+        // Fallback: raw URL (may be CDN-stale for a few minutes after publish)
+        const url = base.includes('?')
+            ? `${base}&_ts=${Date.now()}`
+            : `${base}?_ts=${Date.now()}`;
+        const rawRes = await fetch(url, { cache: 'no-store' });
+        if (!rawRes.ok) {
+            console.warn('[assembly-data] raw fetch failed:', rawRes.status, url);
             return false;
         }
-        const payload = await res.json();
+        const payload = await rawRes.json();
         return applyAssemblyDataPayload(payload);
     } catch (err) {
         console.warn('[assembly-data] remote fetch error:', err);
@@ -1843,4 +1905,18 @@ async function init() {
     }
 }
 
-window.addEventListener('load', init);
+let __assemblyBooted = false;
+async function bootAssembly() {
+    if (__assemblyBooted) return;
+    __assemblyBooted = true;
+    try {
+        await init();
+    } catch (err) {
+        console.error('[assembly] init failed:', err);
+    }
+}
+if (document.readyState === 'complete') {
+    bootAssembly();
+} else {
+    window.addEventListener('load', bootAssembly);
+}
