@@ -50,6 +50,12 @@
   --wn-gray-bg: #545761;
   --wn-gray-rgb: 115, 117, 122;
 
+   
+  --wn-dark-gray: #868686;
+  --wn-dark-gray-light: #808081;
+  --wn-dark-gray-bg: #252525;
+  --wn-dark-gray-rgb: 134, 134, 134;
+
   --wn-bg: #1e1e2d;
 
   --wn-accent: var(--wn-primary);
@@ -61,6 +67,14 @@
   font-weight: 300;
   font-size: 15px;
   line-height: 1.75;
+}
+
+.wn-container .wn-accent-dark-gray,
+.wn-container.wn-accent-dark-gray {
+  --wn-accent: var(--wn-dark-gray);
+  --wn-accent-light: var(--wn-dark-gray-light);
+  --wn-accent-bg: var(--wn-dark-gray-bg);
+  --wn-accent-rgb: var(--wn-dark-gray-rgb);
 }
 
 .wn-container .wn-accent-gray,
@@ -2215,3 +2229,95 @@
 .wn-hero .wn-hero-logo.cp {
   background-image: url("https://combineoverwiki.net/images/d/d6/Civil_Protection_Logo_recreation.png");
 }
+
+ .v-code {
+        padding: 1px 6px;
+        color: var(--wn-accent);
+        background: rgba(var(--wn-accent-rgb), 0.1);
+        border-radius: 3px;
+        border: 1px solid rgba(var(--wn-accent-rgb), 0.2);
+        margin-right: 12px;
+    }
+
+    .ly-tier-banner.penal .display-flex {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .ly-tier-banner.penal .ly-tier-title {
+        position: relative;
+        font-family: 'Bebas Neue', cursive;
+        font-size: 22px;
+        letter-spacing: 4px;
+        color: #fff;
+    }
+
+    .ly-tier-banner.penal .ly-tier-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--wn-accent);
+        box-shadow: 0 0 12px rgba(var(--wn-accent-rgb), 0.6), 0 0 30px rgba(var(--wn-accent-rgb), 0.2);
+        border-radius: 2px;
+    }
+
+    /* .penal .ly-tier-banner-header {
+        background: fixed linear-gradient(90deg, rgba(var(--wn-accent-rgb), 0.05) 0%, rgba(var(--wn-accent-rgb), 0.025) 100%);
+    } */
+
+    .ly-tier-banner.penal>summary.ly-tier-banner-header {
+        gap: 14px;
+        padding: 14px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .ly-tier-banner.penal>summary .display-flex {
+        flex: 1;
+    }
+
+    .wn-container .penal>summary {
+        all: unset;
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        background: rgba(var(--wn-accent-rgb), 0.005);
+        transition: background 0.2s;
+        font-weight: unset;
+    }
+
+    .wn-container .penal>summary:hover {
+        background: rgba(var(--wn-accent-rgb), 0.02);
+    }
+
+    .wn-container .penal>details {
+        all: unset;
+    }
+
+    .wn-container details> :not(summary) {
+        padding: 16px 20px;
+    }
+
+    .ly-desc {
+        display: inline-block;
+        position: relative;
+        width: fit-content;
+        margin: 4px 24px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .ly-desc:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 2px;
+        background: var(--wn-accent);
+        box-shadow: 0 0 12px rgba(var(--wn-accent-rgb), 0.6), 0 0 30px rgba(var(--wn-accent-rgb), 0.2);
+    }
