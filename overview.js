@@ -413,7 +413,7 @@
                 <div style="flex-grow:1;min-width:0;">
                     <div class="display-flex" style="justify-content:space-between;align-items:center;width:100%;">
                         <span class="ly-tier-name" style="font-size: 15px;"><strong>${p.name}</strong></span>
-                        <span class="wn-text-mono" style="color:${p.color};flex-shrink:0;font-size:10px;">
+                        <span class="wn-text-mono" style="color:${p.color};flex-shrink:0;font-size:14px;">
                             ${p.seats} ${p.seats === 1 ? 'SEAT' : 'SEATS'}
                         </span>
                     </div>
