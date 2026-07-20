@@ -2614,16 +2614,6 @@
   color: #32cd32;
 }
 
-.pinned {
-  border: 2px dashed #c52237;
-  box-shadow: 0 0 0 1px rgba(197, 34, 55, 0.25), 0 8px 8px rgba(197, 34, 55, 0.1);
-  transform: translateY(-2px);
-}
-
-.pinned .ly-tier-banner-header {
-  background: rgba(44, 24, 37);
-}
-
 .status-pinned {
   background: rgba(197, 34, 55, 0.2);
   color: #f5a7b0;
