@@ -4280,7 +4280,7 @@
 
 
 
-    .status-active {
+    .status-active, .status-passed {
 
         background: rgba(65, 205, 137, 0.15);
 
