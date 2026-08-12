@@ -2496,22 +2496,22 @@
   justify-content: flex-start;
 }
 
- .wn-container .swap-button {
-     background: transparent;
-     border: 1px solid rgba(var(--wn-accent-rgb), 0.5);
-     color: var(--wn-accent);
-     font-family: 'Share Tech Mono', monospace;
-     padding: 8px 15px;
-     cursor: pointer;
-     transition: all 0.3s ease;
-     text-transform: uppercase;
-     font-weight: 500;
-     letter-spacing: 1px;
-     line-height: normal !important;
- }
+.wn-container .swap-button {
+  background: transparent;
+  border: 1px solid rgba(var(--wn-accent-rgb), 0.5);
+  color: var(--wn-accent);
+  font-family: 'Share Tech Mono', monospace;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+  line-height: normal !important;
+}
 
-.wn-container .button.active,
-.wn-container .button:hover {
+.wn-container .swap-button.active,
+.wn-container .swap-button:hover {
   background: var(--wn-accent);
   color: #fff;
   border-color: var(--wn-accent);
@@ -2519,11 +2519,11 @@
   transform: translateY(-1px);
 }
 
-.wn-container .button:not(.active) {
+.wn-container .swap-button:not(.active) {
   opacity: 0.85;
 }
 
-.wn-container .button:not(.active):hover {
+.wn-container .swap-button:not(.active):hover {
   opacity: 1;
 }
 
