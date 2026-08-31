@@ -2299,7 +2299,7 @@
   margin-bottom: 3px;
 }
 
-button {
+.wn-container button {
   display: inline-flex;
   align-items: center;
   line-height: 1.15;
@@ -2509,7 +2509,7 @@ button {
   justify-content: flex-start;
 }
 
-.button {
+.wn-container .button {
   background: transparent;
   border: 1px solid rgba(var(--wn-accent-rgb), 0.5);
   color: var(--wn-accent);
@@ -2522,8 +2522,8 @@ button {
   letter-spacing: 1px;
 }
 
-.button.active,
-.button:hover {
+.wn-container .button.active,
+.wn-container .button:hover {
   background: var(--wn-accent);
   color: #fff;
   border-color: var(--wn-accent);
@@ -2531,11 +2531,11 @@ button {
   transform: translateY(-1px);
 }
 
-.button:not(.active) {
+.wn-container .button:not(.active) {
   opacity: 0.85;
 }
 
-.button:not(.active):hover {
+.wn-container .button:not(.active):hover {
   opacity: 1;
 }
 
