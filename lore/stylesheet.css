@@ -2772,7 +2772,7 @@ button {
       align-items: center;
       justify-content: center;
       position: relative;
-      transition: height 0.2s ease;
+      transition: none;
       overflow: hidden;
       overscroll-behavior: contain;
   }
@@ -2789,8 +2789,7 @@ button {
       touch-action: manipulation;
       outline: none;
       transform-origin: center center;
-      /* Scroll drives zoom directly; short transition only for click/nav snaps. */
-      transition: transform 0.2s ease;
+      transition: none;
       --map-edge-vis: 0;
   }
 
