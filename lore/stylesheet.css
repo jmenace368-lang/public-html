@@ -2616,7 +2616,7 @@
      border: none;
      text-align: left;
      position: relative;
-     transition: all 0.3s ease;
+     transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
      width: 100%;
  }
 
@@ -2626,6 +2626,7 @@
      font-weight: 500;
      opacity: 0.85;
      padding: 0;
+     color: #9d9daa;
  }
 
  .wn-container .terminal-btn:hover {
@@ -2637,7 +2638,7 @@
  .wn-container .terminal-btn.active {
      opacity: 1;
      color: color-mix(in srgb, var(--wn-accent), white 20%);
-     font-weight: bold !important;
+     font-weight: 600 !important;
      padding-block: 2px;
      transform: translateY(-1px);
 
@@ -2697,8 +2698,8 @@
      letter-spacing: 1px;
  }
 
- .wn-container .nav-children .terminal-btn:not(:last-child) {
-     margin-bottom: 2px;
+ .wn-container .nav-children .terminal-btn:not(.category-btn):not(:last-child) {
+     margin-bottom: 6px;
  }
 
  .wn-toc.nav-box {
@@ -2707,7 +2708,7 @@
 
  .wn-container .nav-box nav {
      gap: 0px;
-     padding-bottom: 0;
+     padding-bottom: 4;
  }
 
  .wn-container .nav-children {
@@ -3056,6 +3057,7 @@
 
  .wn-container .content-flex .sidebar .terminal-btn .cat-label {
      font-family: 'Rajdhani', sans-serif;
-     font-weight: 800;
+     font-weight: bold;
      letter-spacing: 3px;
+     color: #c5c5d6;
  }
