@@ -221,16 +221,22 @@
             : '';
 
         const target = document.querySelector('#panel-home .main-column');
+        const mainNewsHtml = frontPage.length
+            ? (
+                '<div class="main-news ' + layoutClass + '">' +
+                '<div class="primary-news">' + primaryHtml + '</div>' +
+                '<div class="secondary-news">' + secondaryHtml + '</div>' +
+                '</div>'
+            )
+            : '<div class="no-articles"><p>No articles available.</p></div>';
+
         target.innerHTML =
             '<div class="section-wrap">' +
             '<div class="home-intro">' +
             '<div class="kicker">Front Page</div>' +
             '<h1 class="page-title">Current News</h1>' +
             '</div>' +
-            '<div class="main-news ' + layoutClass + '">' +
-            '<div class="primary-news">' + primaryHtml + '</div>' +
-            '<div class="secondary-news">' + secondaryHtml + '</div>' +
-            '</div>' +
+            mainNewsHtml +
             '</div>' +
             moreHtml;
     }
