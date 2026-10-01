@@ -11,7 +11,7 @@
                 let n = 2;
                 while (map.has(article.id + '-' + n)) n += 1;
                 const newId = article.id + '-' + n;
-                renamed.push(article.id + ' → ' + newId);
+                renamed.push(article.id + ' \u2192 ' + newId);
                 article.id = newId;
                 id = newId;
             }
@@ -73,7 +73,7 @@
     }
 
     function formatMeta(article) {
-        return article.published + ' · ' + article.author;
+        return article.published + ' \u00B7 ' + article.author;
     }
 
     function byNewest(a, b) {
@@ -144,7 +144,7 @@
             }
             case 'blockquote': {
                 const cite = block.cite
-                    ? '<cite>— ' + formatText(block.cite) + '</cite>' : '';
+                    ? '<cite>\u2014 ' + formatText(block.cite) + '</cite>' : '';
                 return (
                     '<blockquote class="' + alignClass + '">' +
                     '<p>' + formatText(block.text) + '</p>' +
@@ -278,9 +278,9 @@
             '<article class="widget-content">' +
             '<p>Enjoyed the site? Check out these other websites:</p>' +
             '<ul>' +
-            '<li class="click-sound"><a href="#" onclick="return false;">» www.labourcoop.net</a></li>' +
-            '<li class="click-sound"><a href="#" onclick="return false;">» www.oldworldblues.net</a></li>' +
-            '<li class="click-sound"><a href="#" onclick="return false;">» www.city13.gov/districts/7/</a></li>' +
+            '<li class="click-sound"><a href="#" onclick="return false;">\u00BB www.labourcoop.net</a></li>' +
+            '<li class="click-sound"><a href="#" onclick="return false;">\u00BB www.oldworldblues.net</a></li>' +
+            '<li class="click-sound"><a href="#" onclick="return false;">\u00BB www.city13.gov/districts/7/</a></li>' +
             '</ul>' +
             '</article>' +
             '</div>' +
@@ -385,7 +385,7 @@
         const article = ARTICLE_MAP.get(articleId);
         if (!article) return;
 
-        const typeDisplay = article.type ? escapeHTML(article.type) + ' · ' : '';
+        const typeDisplay = article.type ? escapeHTML(article.type) + ' \u00B7 ' : '';
         const opinionClass = article.opinion === true ? ' opinion-card' : '';
         const linkSvg = '<span class="icon-hyperlink" aria-hidden="true"></span>';
 
@@ -557,7 +557,7 @@
                 '<div style="padding: 8px 10px; color: #999; font-size: 12px;">No results found</div>';
         } else {
             searchResultsDropdown.innerHTML = results.map(function (a) {
-                const typeDisplay = a.type ? ' · ' + escapeHTML(a.type) : '';
+                const typeDisplay = a.type ? ' \u00B7 ' + escapeHTML(a.type) : '';
                 return (
                     '<div class="search-result-item" data-article="' + escapeHTML(a.id) + '">' +
                     '<div class="result-title">' + escapeHTML(a.title) + '</div>' +
